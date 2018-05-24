@@ -16,13 +16,13 @@ public class Settings {
     public static final boolean ACCESSIBLE = true;
 
     public static final String CMD_SEPARATOR = " ";
-	
-	public static final String WASSERSTEIN_PATH = "pytorch" + File.separator + "generator_ws.py";
-	public static final String WASSERSTEIN_GAN = "pytorch" + File.separator + "netG_epoch_5000.pth";
-	
+
+	public static final String WASSERSTEIN_PATH = "/home/tjalling/Desktop/ru/natcomp/DagstuhlGAN/pytorch" + File.separator + "generator_ws.py";
+	public static final String WASSERSTEIN_GAN = "/home/tjalling/Desktop/ru/natcomp/DagstuhlGAN/pytorch" + File.separator + "netG_epoch_5000.pth";
+
 	// Jacob: IMPORTANT! This is a system-specific path that I had to set.
-	public static String PYTHON_PROGRAM = "/anaconda/bin/python";
-	//public static String PYTHON_PROGRAM = "/usr/bin/python";
+	// public static String PYTHON_PROGRAM = "/anaconda/bin/python";
+	public static String PYTHON_PROGRAM = "/usr/bin/python";
 
     public static void printWarnMsg(String msg) {
         System.out.println(WARN_MSG + msg);
@@ -42,12 +42,7 @@ public class Settings {
 
 
     public static void setPythonProgram() {
-        try {
-            Settings.PYTHON_PROGRAM = new String(Files.readAllBytes(Paths.get("my_python_path.txt")));//
-        } catch (IOException e) {
-            printErrorMsg("Can not find the my_python_path.txt which specifies the python program and locates under DagstuhlGAN.");
-            e.printStackTrace();
-        }
+        Settings.PYTHON_PROGRAM = new String("/usr/bin/python");//
     }
 
 }

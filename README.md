@@ -46,7 +46,7 @@ There are two separate aspects to this codebase:
 
 ### Training the GAN
 
-An already trained Pytorch model is part of this repository. It is in 
+An already trained Pytorch model is part of this repository. It is in
 [pytorch/netG_epoch_5000.pth](https://github.com/TheHedgeify/DagstuhlGAN/blob/master/pytorch/netG_epoch_5000.pth).
 However, if you would like to re-train the GAN yourself from scratch here is how you would do it.
 
@@ -68,3 +68,16 @@ This code will evaluate the levels by playing them with Robin Baumgarten's A* Ag
 The level is specified by a latent vector of modifiable size. The values need to be between -1 and 1 and should otherwise be mapped to that value range. To generate an image of the generated level, the class to execute is [cmatest.MarioLevelViewer](https://github.com/TheHedgeify/DagstuhlGAN/blob/master/marioaiDagstuhl/src/viewer/MarioLevelViewer.java). To do this, the class [cmatest.MarioEvalFunction](https://github.com/TheHedgeify/DagstuhlGAN/blob/master/marioaiDagstuhl/src/cmatest/MarioEvalFunction.java) has the function levelFromLatentVector that returns a level, which can be played by an agent (human or artifical) via the BasicSimulator [ch.idsia.mario.simulation.BasicSimulator](https://github.com/TheHedgeify/DagstuhlGAN/blob/master/marioaiDagstuhl/src/ch/idsia/mario/simulation/BasicSimulator.java).
 
 Alternatively, the level can created from a .json file (as produced by the GAN) that describes the level with nested arrays and encodes the different tiles available according to the video level corpus. To do this, use function marioLevelsFromJson in [cmatest.MarioEvalFunction](https://github.com/TheHedgeify/DagstuhlGAN/blob/master/marioaiDagstuhl/src/cmatest/MarioEvalFunction.java)
+
+
+
+###
+
+- install pytorch for python (probably 2.7)
+- Add gson.jar and jdom.jar to your CLASSPATH, e.g.:
+`export CLASSPATH=:/home/tjalling/Desktop/ru/natcomp/DagstuhlGAN/marioaiDagstuhl/lib/gson-2.2.4.jar:/home/tjalling/Desktop/ru/natcomp/DagstuhlGAN/marioaiDagstuhl/lib/jdom.jar:`
+- marioaiDagstuhl/src/basicMap/Settings.java: change WASSERSTEIN_PATH and WASSERSTEIN_GAN to the pytorch path
+- marioaiDagstuhl/src/basicMap/Settings.java: change line 25, and 45, change path to your Python path
+- Retrain the pytorch thing: `python pytorch/main.py`
+- go to src folder
+- `javac viewer/MarioRandomLevelViewer`

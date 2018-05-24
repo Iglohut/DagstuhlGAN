@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  *
  * @author vv + Amy
@@ -19,7 +20,7 @@ import java.util.List;
 public class JsonReader {
     private List<List<List<Integer>>> json;
     int current;
-    
+
     public JsonReader(String filename){
         if(GlobalOptions.JsonAsString){
             json = JsonToInt(filename);
@@ -28,24 +29,24 @@ public class JsonReader {
         }
         current = 0;
     }
-    
+
     public int getNumber(){
         return json.size();
     }
-    
+
     public List<List<Integer>> getLevel(int ind){
         return json.get(ind);
     }
-    
+
     public boolean hasNext(){
         return current<=json.size();
     }
-    
+
     public List<List<Integer>> next(){
         current++;
         return json.get(current-1);
     }
-    
+
     /**
      * Creates integer list representation of multiple levels from a json
      * file whose path is designated by the parameter.
@@ -54,14 +55,14 @@ public class JsonReader {
      *         represents a tile/sprite type.
      */
     public static List<List<List<Integer>>> JsonToIntFromFile(String fileLocation)
-    {    	
+    {
     	//array, array, array int
     	List<String> lines = new ArrayList<String>();
-    	try 
+    	try
     	{
     		lines = Files.readAllLines(Paths.get(fileLocation), Charset.defaultCharset());
-    	} 
-    	catch (IOException e1) 
+    	}
+    	catch (IOException e1)
     	{
     		e1.printStackTrace();
     	}
@@ -78,15 +79,15 @@ public class JsonReader {
      */
     public static List<List<List<Integer>>> JsonToIntFromFile(List<String> lines)
     {
-        StringBuilder jsonStringBuilder = new StringBuilder(); 
+        StringBuilder jsonStringBuilder = new StringBuilder();
     	for(String s: lines) // Need to use StringBuilder here for efficiency
     		jsonStringBuilder.append(s);
-    	
+
     	String myJSONString=jsonStringBuilder.toString();
     	JsonArray jarray1 = new Gson().fromJson(myJSONString, JsonArray.class);//first array
-    
+
     	List<List<List<Integer>>> myReturnList = new ArrayList<List<List<Integer>>>();
-    	
+
     	for(int i = 0; i < jarray1.size();i++)
     	{
     		List<List<Integer>> myFirstSubList = new ArrayList<List<Integer>>();
@@ -102,7 +103,7 @@ public class JsonReader {
     			myFirstSubList.add(mySecondSubList);
     		}
     		myReturnList.add(myFirstSubList);
-    	}	
+    	}
     	return myReturnList;
     }
 
@@ -111,9 +112,9 @@ public class JsonReader {
     // The method above may unnecessarily duplicate some functionality of this method
     public static List<List<List<Integer>>> JsonToInt(String myJSONString)
     {   JsonArray jarray1 = new Gson().fromJson(myJSONString, JsonArray.class);//first array
-    
+
     	List<List<List<Integer>>> myReturnList = new ArrayList<List<List<Integer>>>();
-    	
+
     	for(int i = 0; i < jarray1.size();i++)
     	{
     		List<List<Integer>> myFirstSubList = new ArrayList<List<Integer>>();
@@ -129,7 +130,7 @@ public class JsonReader {
     			myFirstSubList.add(mySecondSubList);
     		}
     		myReturnList.add(myFirstSubList);
-    	}	
+    	}
     	return myReturnList;
     }
 
