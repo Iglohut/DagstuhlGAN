@@ -80,4 +80,5 @@ Alternatively, the level can created from a .json file (as produced by the GAN) 
 - marioaiDagstuhl/src/basicMap/Settings.java: change line 25, and 45, change path to your Python path
 - Retrain the pytorch thing: `python pytorch/main.py`
 - go to src folder
-- `javac viewer/MarioRandomLevelViewer`
+- `javac viewer/MarioRandomLevelViewer` on linux, and on windows: `javac -cp "D:\OneDrive\RU\Master Artificial Intelligence\courses\Natural Computing\Project\DagstuhlGAN-master\marioaiDagstuhl\src" viewer/MarioRandomLevelViewer.java`
+
